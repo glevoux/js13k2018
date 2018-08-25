@@ -4,17 +4,22 @@ drawElement(player);
 var movementSpeed = 2;
 
 setInterval(function() {
-	var arround = getArround(player.x, player.y, 1, 1, movementSpeed / 16, movementSpeed * 2 / 16);
-	if (keys[37] && !arround.left) {
-		player.move(-movementSpeed/16, 0);
+	var deltaX = movementSpeed/16;
+	var deltaY = movementSpeed * 2 / 16;
+	//getArround(player.x - deltaX, player.y, 1, 1);
+	// console.log('--------------');
+	if (keys[37] && !getArround(player.x - deltaX, player.y, 1, 1).left) {
+		player.move(-deltaX, 0);
 		player.currentMovement('walking-left');
 	}
+	
+	if (keys[39] && !getArround(player.x + deltaX, player.y, 1, 1).right) {
+		player.move(deltaX, 0);
+		player.currentMovement('walking-right');
+	}
+
 	if (keys[38] && !player.jumping && !player.isFalling) {
 		player.startJump();
-	}
-	if (keys[39] && !arround.right) {
-		player.move(movementSpeed/16, 0);
-		player.currentMovement('walking-right');
 	}
 
 	if (!keys[37] && !keys[39]) {
@@ -22,16 +27,17 @@ setInterval(function() {
 	}
 
 	if (player.jumping) {
-		var deltaX = (new Date()).getTime() - player.jumping;
+		var deltaXJ = (new Date()).getTime() - player.jumping;
 		player.falling(true);
-		if (deltaX < 150 && !arround.top) {
-			player.move(0, -movementSpeed * 2 / 16);
+
+		if (deltaXJ < 150 && !getArround(player.x, player.y - deltaY, 1, 1).top) {
+			player.move(0, -deltaY);
 		} else {
 			player.jumping = false;
 		}
 	} else {
-		if (!arround.bottom) {
-			player.move(0, movementSpeed * 2 / 16);
+		if (!getArround(player.x, player.y + deltaY, 1, 1).bottom) {
+			player.move(0, deltaY);
 			player.falling(true);
 		} else {
 			player.falling(false);
