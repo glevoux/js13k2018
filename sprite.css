@@ -28,10 +28,11 @@
 }
 
 .sprite.player {
-	background-position: 0 calc(-16px * var(--size));
+	background-position-x: 0;
+	background-position-y: calc(-16px * var(--size));
 }
 .sprite.player.falling {
-	background-position: calc(-48px * var(--size)) calc(-16px * var(--size));
+	background-position-x: calc(-80px * var(--size)) !important;
 }
 .sprite.player.walking-left, .sprite.player.walking-right {
 	animation: 0.3s infinite walk step-end;

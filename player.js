@@ -10,17 +10,14 @@ setInterval(function() {
 	// console.log('--------------');
 
 	// Sprite specific dimensions
-	var xPos = player.x + 0.25;
-	var yPos = player.y;
-	var xWidth = 0.5;
-	var yWidth = 1;
+	var hitbox = player.getHitbox();
 
-	if (keys[37] && !getArround(xPos - deltaX, yPos, xWidth, yWidth).left) {
+	if (keys[37] && !getArround(hitbox.x - deltaX, hitbox.y, hitbox.w, hitbox.h).left) {
 		player.move(-deltaX, 0);
 		player.currentMovement('walking-left');
 	}
 	
-	if (keys[39] && !getArround(xPos + deltaX, yPos, xWidth, yWidth).right) {
+	if (keys[39] && !getArround(hitbox.x + deltaX, hitbox.y, hitbox.w, hitbox.h).right) {
 		player.move(deltaX, 0);
 		player.currentMovement('walking-right');
 	}
@@ -37,17 +34,24 @@ setInterval(function() {
 		var deltaXJ = (new Date()).getTime() - player.jumping;
 		player.falling(true);
 
-		if (deltaXJ < 150 && !getArround(xPos, yPos - deltaY, xWidth, yWidth).top) {
+		if (deltaXJ < 300 && !getArround(hitbox.x, hitbox.y - deltaY, hitbox.w, hitbox.h).top) {
 			player.move(0, -deltaY);
 		} else {
 			player.jumping = false;
 		}
 	} else {
-		if (!getArround(xPos, yPos + deltaY, xWidth, yWidth).bottom) {
+		if (!getArround(hitbox.x, hitbox.y + deltaY, hitbox.w, hitbox.h).bottom) {
 			player.move(0, deltaY);
+			player.falling(true);
+		} else if (!getArround(hitbox.x, hitbox.y + deltaX, hitbox.w, hitbox.h).bottom) {
+			player.move(0, deltaX);
 			player.falling(true);
 		} else {
 			player.falling(false);
 		}
 	}
+
+	getCurrents(hitbox.x, hitbox.y, hitbox.w, hitbox.h).forEach(function(t) {
+		t.touch(player);
+	});
 }, 33);

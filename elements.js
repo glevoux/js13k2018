@@ -34,12 +34,53 @@ class Element {
 		this.dom.style.top = this.y * toDom() + 'px';
 		this.dom.style.left = this.x * toDom() + 'px';
 	}
+
+	touch(e) {}
+
+	getHitbox() {
+		return {
+			x: this.x,
+			y: this.y,
+			w: 1,
+			h: 1
+		};
+	}
 }
 
 class Decor extends Element {
-	constructor(type, x, y, blocking) {
+	constructor(type, x, y) {
 		super(type, x, y);
-		this.blocking = blocking;
+		if (this.type.indexOf('stair') === -1) {
+			this.blocking = true;
+		}
+	}
+
+	touch(e) {
+		if (this.type.indexOf('stair') === 0 && this.type.indexOf('flip') !== -1) {
+			var hitbox = e.getHitbox();
+			var center = hitbox.x+hitbox.w/2;
+			if (Math.floor(center) === this.x) {
+				var insideProgress = center - this.x;
+				if (hitbox.y+hitbox.h > this.y + 1 - insideProgress) {
+					e.move(0, -(hitbox.y+hitbox.h - (this.y + 1 - insideProgress)));
+					if (e.isFalling) {
+						e.falling(false);
+					}
+				}
+			}
+		} else if (this.type.indexOf('stair') === 0 && this.type.indexOf('flip') === -1) {
+			var hitbox = e.getHitbox();
+			var center = hitbox.x+hitbox.w/2;
+			if (Math.floor(center) === this.x) {
+				var insideProgress = 1 + this.x - center;
+				if (hitbox.y+hitbox.h > this.y + 1 - insideProgress) {
+					e.move(0, -(hitbox.y+hitbox.h - (this.y + 1 - insideProgress)));
+					if (e.isFalling) {
+						e.falling(false);
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -93,6 +134,15 @@ class Character extends Element {
 			this.dom.classList.remove('falling');
 		}
 		this.isFalling = isFalling;
+	}
+
+	getHitbox() {
+		return {
+			x: this.x + 0.25,
+			y: this.y,
+			w: 0.5,
+			h: 1
+		};
 	}
 }
 
