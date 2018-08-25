@@ -8,12 +8,19 @@ setInterval(function() {
 	var deltaY = movementSpeed * 2 / 16;
 	//getArround(player.x - deltaX, player.y, 1, 1);
 	// console.log('--------------');
-	if (keys[37] && !getArround(player.x - deltaX, player.y, 1, 1).left) {
+
+	// Sprite specific dimensions
+	var xPos = player.x + 0.25;
+	var yPos = player.y;
+	var xWidth = 0.5;
+	var yWidth = 1;
+
+	if (keys[37] && !getArround(xPos - deltaX, yPos, xWidth, yWidth).left) {
 		player.move(-deltaX, 0);
 		player.currentMovement('walking-left');
 	}
 	
-	if (keys[39] && !getArround(player.x + deltaX, player.y, 1, 1).right) {
+	if (keys[39] && !getArround(xPos + deltaX, yPos, xWidth, yWidth).right) {
 		player.move(deltaX, 0);
 		player.currentMovement('walking-right');
 	}
@@ -30,13 +37,13 @@ setInterval(function() {
 		var deltaXJ = (new Date()).getTime() - player.jumping;
 		player.falling(true);
 
-		if (deltaXJ < 150 && !getArround(player.x, player.y - deltaY, 1, 1).top) {
+		if (deltaXJ < 150 && !getArround(xPos, yPos - deltaY, xWidth, yWidth).top) {
 			player.move(0, -deltaY);
 		} else {
 			player.jumping = false;
 		}
 	} else {
-		if (!getArround(player.x, player.y + deltaY, 1, 1).bottom) {
+		if (!getArround(xPos, yPos + deltaY, xWidth, yWidth).bottom) {
 			player.move(0, deltaY);
 			player.falling(true);
 		} else {
