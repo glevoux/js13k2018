@@ -158,6 +158,8 @@ function randomPNJ() {
 class Item extends Element {
 	constructor(type, x, y) {
 		super(type, x, y);
+
+		this.dom.classList.add('item');
 	}
 
 	touch(e) {
