@@ -1,0 +1,25 @@
+:root {
+	--size: 4;
+}
+
+.sprite {
+	display: block;
+	position: absolute;
+	width: calc(16px * var(--size));
+	height: calc(16px * var(--size));
+
+	background-image: url(./assets/sprites.png); 
+	background-repeat: no-repeat;
+	background-size: calc(48px * var(--size)) calc(16px * var(--size));
+	image-rendering: pixelated;
+}
+
+.sprite.wall1 {
+	background-position: 0 0;
+}
+.sprite.wall2 {
+	background-position: calc(-16px * var(--size)) 0;
+}
+.sprite.stair {
+	background-position: calc(-32px * var(--size)) 0;
+}
