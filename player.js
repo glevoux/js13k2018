@@ -1,4 +1,4 @@
-var player = new Character('player', 1, 8);
+var player = new Character('player', 1, 11);
 drawElement(player);
 
 var movementSpeed = 2;
@@ -6,10 +6,7 @@ var movementSpeed = 2;
 setInterval(function() {
 	var deltaX = movementSpeed/16;
 	var deltaY = movementSpeed * 2 / 16;
-	//getArround(player.x - deltaX, player.y, 1, 1);
-	// console.log('--------------');
 
-	// Sprite specific dimensions
 	var hitbox = player.getHitbox();
 
 	if (keys[37] && !getArround(hitbox.x - deltaX, hitbox.y, hitbox.w, hitbox.h).left) {
@@ -50,6 +47,8 @@ setInterval(function() {
 			player.falling(false);
 		}
 	}
+
+	moveEnnemies(deltaX);
 
 	getCurrents(hitbox.x, hitbox.y, hitbox.w, hitbox.h).forEach(function(t) {
 		t.touch(player);

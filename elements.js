@@ -99,8 +99,10 @@ class Character extends Element {
 			case 'player':
 				super(type, x, y);
 				break;
-			case 'PNJ':
-				super(`pnj${randomPNJ}`, x, y);
+			case 'pnj':
+				super(`pnj${randomPNJ()} pnj`, x, y);
+				this.baseX = x;
+				this.direction = Math.floor(Math.random() * 2) === 0 ? -1 : 1;
 				break;
 			default:
 				throw new Error(`Type ${type} unknown for class Character`);
@@ -148,6 +150,12 @@ class Character extends Element {
 			w: 0.5,
 			h: 1
 		};
+	}
+
+	touch(e) {
+		if (e.type === 'player') {
+			console.log('Ouch !');
+		}
 	}
 }
 

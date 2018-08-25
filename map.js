@@ -1,14 +1,20 @@
 var map = [
-	['wall1', 'wall1'   , 'wall1' , 'wall1'   , 'wall1' , 'wall1'      , 'wall1' , 'wall1'         , 'wall1'        , 'wall1'],
-	['wall1', ''        , ''      , ''        , ''      , ''           , ''      , ''              , ''             , 'wall1'],
-	['wall1', ''        , ''      , ''        , 'donut' , ''           , 'list'  , ''              , ''             , 'wall1'],
-	['wall1', ''        , ''      , 'wall1'   , 'wall1' , 'wall1'      , 'wall1' , 'wall1'         , 'wall1'        , 'wall1'],
-	['wall1', 'stair'   , ''      , ''        , ''      , ''           , ''      , ''              , ''             , 'wall1'],
-	['wall1', 'substair', 'stair' , 'key'     , ''      , 'power'      , ''      , ''              , ''             , 'wall1'],
-	['wall1', 'wall1'   , 'wall1' , 'ground'  , 'ground', 'ground'     , 'ground', ''              , ''             , 'wall1'],
-	['wall1', ''        , ''      , ''        , ''      , ''           , ''      , ''              , 'stair flip'   , 'wall1'],
-	['wall1', ''        , ''      , 'ethernet', ''      , 'wifi-router', ''      , 'stair flip'    , 'substair flip', 'wall1'],
-	['wall1', 'ground'  , 'ground', 'ground'  , 'ground', 'ground'     , 'ground', 'wall1'         , 'wall1'        , 'wall1']
+	['wall1', 'wall1'   , 'wall1'   , 'wall1'   , 'wall1'   , 'wall1'      , 'wall1' , 'wall1'         , 'wall1'         , 'wall1'         , 'wall1'        , 'wall1'],
+	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , ''              , ''              , ''             , 'wall1'],
+	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , ''              , ''              , ''             , 'wall1'],
+	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , ''              , ''              , ''             , 'wall1'],
+	['wall1', ''        , ''        , ''        , 'donut'   , 'pnj'        , 'list'  , ''              , ''              , ''              , ''             , 'wall1'],
+	['wall1', ''        , ''        , 'ground'  , 'ground'  , 'ground'     , 'ground', 'ground'        , 'ground'        , 'ground'        , 'ground'       , 'wall1'],
+	['wall1', 'stair'   , ''        , ''        , ''        , ''           , ''      , ''              , ''              , ''              , ''             , 'wall1'],
+	['wall1', 'substair', 'stair'   , ''        , ''        , ''           , ''      , ''              , ''              , ''              , ''             , 'wall1'],
+	['wall1', 'wall1'   , 'substair', 'stair'   , ''        , ''           , ''      , ''              , ''              , ''              , ''             , 'wall1'],
+	['wall1', 'wall1'   , 'wall1'   , 'substair', 'stair'   , 'power'      , ''      , 'pnj'           , ''              , ''              , ''             , 'wall1'],
+	['wall1', 'wall1'   , 'wall1'   , 'wall1'   , 'substair', 'ground'     , 'ground', 'ground'        , 'ground'        , ''              , ''             , 'wall1'],
+	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , ''              , ''              , 'stair flip'   , 'wall1'],
+	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , ''              , 'stair flip'    , 'substair flip', 'wall1'],
+	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , 'stair flip'    , 'substair flip' , 'wall1'        , 'wall1'],
+	['wall1', ''        , ''        , 'ethernet', ''        , 'wifi-router', ''      , 'stair flip'    , 'substair flip' , 'wall1'         , 'wall1'        , 'wall1'],
+	['wall1', 'ground'  , 'ground'  , 'ground'  , 'ground'  , 'ground'     , 'ground', 'substair flip' , 'wall1'         , 'wall1'         , 'wall1'        , 'wall1']
 ];
 
 var i, j;
@@ -16,11 +22,14 @@ var domMap = [];
 
 var decors = ['wall1', 'ground', 'substair', 'stair', 'stair flip', 'substair flip'];
 var items = ['ethernet', 'wifi-router', 'power', 'key', 'donut', 'list'];
+var ennemies = ['pnj'];
+
+var ennemiesDom = [];
 
 for (i = 0; i < map.length; i++) {
 	var level = map[i];
 	var domLevel = [];
-	for (j = 0; j < map.length; j++) {
+	for (j = 0; j < level.length; j++) {
 		if (level[j]) {
 			var tile;
 			if (decors.includes(level[j])) {
@@ -29,6 +38,10 @@ for (i = 0; i < map.length; i++) {
 			} else if (items.includes(level[j])) {
 				tile = new Item(level[j], j, i);
 				domLevel.push(tile);
+			} else if (ennemies.includes(level[j])) {
+				tile = new Character('pnj', j, i);
+				ennemiesDom.push(tile);
+				domLevel.push({blocking: false});
 			}
 			drawElement(tile);
 		} else {
@@ -125,6 +138,12 @@ function getCurrents(x, y, w, h) {
 		}
 	}
 
+	ennemiesDom.forEach(function(ennemy) {
+		if (collapse(ennemy.getHitbox(), pObj)) {
+			collapsingTiles.push(ennemy);
+		}
+	});
+
 	return collapsingTiles;
 }
 
@@ -143,4 +162,19 @@ function collapse(obj1, obj2) {
 
 function remove(e) {
 	domMap[e.y][e.x] = undefined;
+}
+
+function moveEnnemies(deltaX) {
+	ennemiesDom.forEach(function(ennemy) {
+		if (ennemy.x < ennemy.baseX - 1 || ennemy.x > ennemy.baseX + 1) {
+			ennemy.direction *= -1;
+			if (ennemy.direction === -1) {
+				ennemy.currentMovement('walking-left');
+			} else {
+				ennemy.currentMovement('walking-right');
+			}
+		}
+
+		ennemy.move(ennemy.direction * deltaX, 0);
+	});
 }

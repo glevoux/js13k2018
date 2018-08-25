@@ -56,6 +56,34 @@
 	}
 }
 
+.sprite.pnj {
+	background-position-x: 0;
+	animation: 0.3s infinite walkPNJ step-end alternate;
+}
+.sprite.pnj0 {
+	background-position-y: calc(-32px * var(--size));
+}
+.sprite.pnj1 {
+	background-position-y: calc(-48px * var(--size));
+}
+.sprite.pnj2 {
+	background-position-y: calc(-64px * var(--size));
+}
+
+@keyframes walkPNJ {
+	0%, 25% {
+		background-position-x: calc(-16px * var(--size));
+	}
+
+	25%, 75% {
+		background-position-x: 0;
+	}
+
+	75%, 100% {
+		background-position-x: calc(-32px * var(--size));
+	}
+}
+
 .sprite.ethernet {
 	background-position: 0 calc(-80px * var(--size));
 }
