@@ -35,23 +35,22 @@
 }
 .sprite.player.walking-left, .sprite.player.walking-right {
 	animation: 0.3s infinite walk step-end;
-
 }
 
 @keyframes walk {
-	from {
+	0%, 20% {
 		background-position-x: 0;
 	}
 
-	to {
-		background-position-x: calc(-32px * var(--size));
-	}
-
-	33% {
+	21%, 40% {
 		background-position-x: calc(-16px * var(--size));
 	}
 
-	66% {
-		background-position-x: 0;
+	41%, 60% {
+		background-position-x: calc(-32px * var(--size));
+	}
+
+	67%, 100% {
+		background-position-x: calc(-48px * var(--size));
 	}
 }
