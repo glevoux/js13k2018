@@ -9,7 +9,7 @@ setInterval(function() {
 		player.move(-movementSpeed/16, 0);
 		player.currentMovement('walking-left');
 	}
-	if (keys[38] && !player.jumping) {
+	if (keys[38] && !player.jumping && !player.isFalling) {
 		player.startJump();
 	}
 	if (keys[39] && !arround.right) {
@@ -23,6 +23,7 @@ setInterval(function() {
 
 	if (player.jumping) {
 		var deltaX = (new Date()).getTime() - player.jumping;
+		player.falling(true);
 		if (deltaX < 150 && !arround.top) {
 			player.move(0, -movementSpeed * 2 / 16);
 		} else {
@@ -31,6 +32,9 @@ setInterval(function() {
 	} else {
 		if (!arround.bottom) {
 			player.move(0, movementSpeed * 2 / 16);
+			player.falling(true);
+		} else {
+			player.falling(false);
 		}
 	}
 }, 33);

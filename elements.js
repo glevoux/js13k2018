@@ -17,7 +17,8 @@ class Element {
 		this.y = y;
 
 		this.dom = document.createElement('div');
-		this.dom.classList.add(this.type);
+		this.type.split(' ').forEach(t => this.dom.classList.add(t));
+		
 		this.dom.classList.add('sprite');
 
 		this.dom.style.top = this.y * toDom() + 'px';
@@ -69,6 +70,12 @@ class Character extends Element {
 				this.dom.classList.add(m);
 			}
 		});
+
+		if (movement === 'walking-left') {
+			this.dom.classList.add('flip');
+		} else if (movement === 'walking-right') {
+			this.dom.classList.remove('flip');
+		}
 	}
 
 	startJump() {
@@ -77,7 +84,15 @@ class Character extends Element {
 		}
 
 		this.jumping = (new Date()).getTime();
-		this.dom.classList.add('jumping');
+	}
+
+	falling(isFalling) {
+		if (isFalling) {
+			this.dom.classList.add('falling');
+		} else {
+			this.dom.classList.remove('falling');
+		}
+		this.isFalling = isFalling;
 	}
 }
 

@@ -10,3 +10,7 @@ body {
 
 	overflow: hidden;
 }
+
+.flip {
+	transform: scaleX(-1);
+}

@@ -4,11 +4,11 @@ var map = [
 	['wall1', ''     , ''     , ''     , ''     , ''     , ''     , ''     , ''     , 'wall1'],
 	['wall1', ''     , ''     , 'wall1', 'wall1', 'wall1', 'wall1', 'wall1', 'wall1', 'wall1'],
 	['wall1', 'stair', ''     , ''     , ''     , ''     , ''     , ''     , ''     , 'wall1'],
-	['wall1', 'wall1', 'stair', ''     , ''     , ''     , ''     , ''     , ''     , 'wall1'],
-	['wall1', 'wall1', 'wall1', 'wall1', 'wall1', 'wall1', 'wall1', ''     , ''     , 'wall1'],
-	['wall1', ''     , ''     , ''     , ''     , ''     , ''     , ''     , 'stair', 'wall1'],
-	['wall1', ''     , ''     , ''     , ''     , ''     , ''     , 'stair', 'wall1', 'wall1'],
-	['wall1', 'wall1', 'wall1', 'wall1', 'wall1', 'wall1', 'wall1', 'wall1', 'wall1', 'wall1']
+	['wall1', 'substair', 'stair', ''     , ''     , ''     , ''     , ''     , ''     , 'wall1'],
+	['wall1', 'wall1', 'wall1', 'ground', 'ground', 'ground', 'ground', ''     , ''     , 'wall1'],
+	['wall1', ''     , ''     , ''     , ''     , ''     , ''     , ''     , 'stair flip', 'wall1'],
+	['wall1', ''     , ''     , ''     , ''     , ''     , ''     , 'stair flip', 'substair flip', 'wall1'],
+	['wall1', 'ground', 'ground', 'ground', 'ground', 'ground', 'ground', 'wall1', 'wall1', 'wall1']
 ];
 
 var i, j;
