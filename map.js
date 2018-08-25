@@ -1,25 +1,35 @@
 var map = [
-	['wall1', 'wall1', 'wall1', 'wall1', 'wall1', 'wall1', 'wall1', 'wall1', 'wall1', 'wall1'],
-	['wall1', ''     , ''     , ''     , ''     , ''     , ''     , ''     , ''     , 'wall1'],
-	['wall1', ''     , ''     , ''     , ''     , ''     , ''     , ''     , ''     , 'wall1'],
-	['wall1', ''     , ''     , 'wall1', 'wall1', 'wall1', 'wall1', 'wall1', 'wall1', 'wall1'],
-	['wall1', 'stair', ''     , ''     , ''     , ''     , ''     , ''     , ''     , 'wall1'],
-	['wall1', 'substair', 'stair', ''     , ''     , ''     , ''     , ''     , ''     , 'wall1'],
-	['wall1', 'wall1', 'wall1', 'ground', 'ground', 'ground', 'ground', ''     , ''     , 'wall1'],
-	['wall1', ''     , ''     , ''     , ''     , ''     , ''     , ''     , 'stair flip', 'wall1'],
-	['wall1', ''     , ''     , ''     , ''     , ''     , ''     , 'stair flip', 'substair flip', 'wall1'],
-	['wall1', 'ground', 'ground', 'ground', 'ground', 'ground', 'ground', 'wall1', 'wall1', 'wall1']
+	['wall1', 'wall1'   , 'wall1' , 'wall1'   , 'wall1' , 'wall1'      , 'wall1' , 'wall1'         , 'wall1'        , 'wall1'],
+	['wall1', ''        , ''      , ''        , ''      , ''           , ''      , ''              , ''             , 'wall1'],
+	['wall1', ''        , ''      , ''        , 'donut' , ''           , 'list'  , ''              , ''             , 'wall1'],
+	['wall1', ''        , ''      , 'wall1'   , 'wall1' , 'wall1'      , 'wall1' , 'wall1'         , 'wall1'        , 'wall1'],
+	['wall1', 'stair'   , ''      , ''        , ''      , ''           , ''      , ''              , ''             , 'wall1'],
+	['wall1', 'substair', 'stair' , 'key'     , ''      , 'power'      , ''      , ''              , ''             , 'wall1'],
+	['wall1', 'wall1'   , 'wall1' , 'ground'  , 'ground', 'ground'     , 'ground', ''              , ''             , 'wall1'],
+	['wall1', ''        , ''      , ''        , ''      , ''           , ''      , ''              , 'stair flip'   , 'wall1'],
+	['wall1', ''        , ''      , 'ethernet', ''      , 'wifi-router', ''      , 'stair flip'    , 'substair flip', 'wall1'],
+	['wall1', 'ground'  , 'ground', 'ground'  , 'ground', 'ground'     , 'ground', 'wall1'         , 'wall1'        , 'wall1']
 ];
 
 var i, j;
 var domMap = [];
+
+var decors = ['wall1', 'ground', 'substair', 'stair', 'stair flip', 'substair flip'];
+var items = ['ethernet', 'wifi-router', 'power', 'key', 'donut', 'list'];
+
 for (i = 0; i < map.length; i++) {
 	var level = map[i];
 	var domLevel = [];
 	for (j = 0; j < map.length; j++) {
 		if (level[j]) {
-			var tile = new Decor(level[j], j, i);
-			domLevel.push(tile);
+			var tile;
+			if (decors.includes(level[j])) {
+				tile = new Decor(level[j], j, i);
+				domLevel.push(tile);
+			} else if (items.includes(level[j])) {
+				tile = new Item(level[j], j, i);
+				domLevel.push(tile);
+			}
 			drawElement(tile);
 		} else {
 			domLevel.push({blocking: false});
@@ -129,4 +139,8 @@ function collapse(obj1, obj2) {
 
 	// console.log(JSON.stringify(obj1), JSON.stringify(obj2), xCollapse, yCollapse);
 	return xCollapse && yCollapse;
+}
+
+function remove(e) {
+	domMap[e.y][e.x] = undefined;
 }

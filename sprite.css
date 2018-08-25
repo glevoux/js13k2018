@@ -55,3 +55,22 @@
 		background-position-x: calc(-48px * var(--size));
 	}
 }
+
+.sprite.ethernet {
+	background-position: 0 calc(-80px * var(--size));
+}
+.sprite.wifi-router {
+	background-position: calc(-16px * var(--size)) calc(-80px * var(--size));
+}
+.sprite.power {
+	background-position: calc(-32px * var(--size)) calc(-80px * var(--size));
+}
+.sprite.key {
+	background-position: calc(-48px * var(--size)) calc(-80px * var(--size));
+}
+.sprite.donut {
+	background-position: calc(-64px * var(--size)) calc(-80px * var(--size));
+}
+.sprite.list {
+	background-position: calc(-80px * var(--size)) calc(-80px * var(--size));
+}

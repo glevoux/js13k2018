@@ -4,6 +4,8 @@ var gameDom = document.querySelector('.game');
 
 var keys = {};
 
+var objectsFound = [];
+
 function drawElement(e) {
 	e.isRendered = true;
 	gameDom.appendChild(e.dom);

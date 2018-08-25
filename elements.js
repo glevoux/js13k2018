@@ -45,6 +45,11 @@ class Element {
 			h: 1
 		};
 	}
+
+	destroy() {
+		this.dom.remove();
+		remove(this);
+	}
 }
 
 class Decor extends Element {
@@ -152,25 +157,13 @@ function randomPNJ() {
 
 class Item extends Element {
 	constructor(type, x, y) {
-		switch (type) {
-			case 'ethernet':
-				super('0,80,16,16', x, y);
-				break;
-			case 'wifi':
-				super('16,80,16,16', x, y);
-				break;
-			case 'alim':
-				super('32,80,16,16', x, y);
-				break;
-			case 'keys':
-				super('48,80,16,16', x, y);
-				break;
-			case 'donuts':
-				super('64,80,16,16', x, y);
-				break;
-			case 'cake':
-				super('80,80,16,16', x, y);
-				break;
+		super(type, x, y);
+	}
+
+	touch(e) {
+		if (e.type === 'player') {
+			this.destroy();
+			objectsFound.push(this.type);
 		}
 	}
 }
