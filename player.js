@@ -1,5 +1,9 @@
+import { Character } from 'Elements';
+import Game from 'Game';
+import Map from 'Map';
+
 var player = new Character('player', 1, 11);
-drawElement(player);
+Game.drawElement(player);
 var playerPosition = player.dom.getBoundingClientRect();
 var screenWidth = window.innerWidth;
 var screenHeight = window.innerHeight;
@@ -7,8 +11,8 @@ var screenHeight = window.innerHeight;
 var targetLeft = screenWidth / 2;
 var targetTop = screenHeight / 2;
 
-gameDom.style.left = targetLeft - playerPosition.left - 24 + 'px';
-gameDom.style.top = targetTop - playerPosition.top - 24 + 'px';
+Game.gameDom.style.left = targetLeft - playerPosition.left - 24 + 'px';
+Game.gameDom.style.top = targetTop - playerPosition.top - 24 + 'px';
 
 var movementSpeed = 2;
 
@@ -25,11 +29,11 @@ setInterval(function() {
 		var hit = false;
 		if (deltaTime < 300) {
 			if (hurtedDirection === 'left') {
-				if (!getArround(hitbox.x - deltaY, hitbox.y - deltaX, hitbox.w, hitbox.h).left) {
+				if (!Map.getArround(hitbox.x - deltaY, hitbox.y - deltaX, hitbox.w, hitbox.h).left) {
 					player.move(-deltaY, -deltaX);
 				}
 			} else {
-				if (!getArround(hitbox.x + deltaY, hitbox.y - deltaX, hitbox.w, hitbox.h).right) {
+				if (!Map.getArround(hitbox.x + deltaY, hitbox.y - deltaX, hitbox.w, hitbox.h).right) {
 					player.move(deltaY, -deltaX);
 				}
 			}
@@ -37,21 +41,21 @@ setInterval(function() {
 			player.endHurt();
 		}
 	} else {
-		if (keys[37] && !getArround(hitbox.x - deltaX, hitbox.y, hitbox.w, hitbox.h).left) {
+		if (Game.keys[37] && !Map.getArround(hitbox.x - deltaX, hitbox.y, hitbox.w, hitbox.h).left) {
 			player.move(-deltaX, 0);
 			player.currentMovement('walking-left');
 		}
 		
-		if (keys[39] && !getArround(hitbox.x + deltaX, hitbox.y, hitbox.w, hitbox.h).right) {
+		if (Game.keys[39] && !Map.getArround(hitbox.x + deltaX, hitbox.y, hitbox.w, hitbox.h).right) {
 			player.move(deltaX, 0);
 			player.currentMovement('walking-right');
 		}
 
-		if (keys[38] && !player.jumping && !player.isFalling) {
+		if (Game.keys[38] && !player.jumping && !player.isFalling) {
 			player.startJump();
 		}
 
-		if (!keys[37] && !keys[39]) {
+		if (!Game.keys[37] && !Game.keys[39]) {
 			player.currentMovement();
 		}
 
@@ -59,16 +63,16 @@ setInterval(function() {
 			var deltaXJ = (new Date()).getTime() - player.jumping;
 			player.falling(true);
 
-			if (deltaXJ < 300 && !getArround(hitbox.x, hitbox.y - deltaY, hitbox.w, hitbox.h).top) {
+			if (deltaXJ < 300 && !Map.getArround(hitbox.x, hitbox.y - deltaY, hitbox.w, hitbox.h).top) {
 				player.move(0, -deltaY);
 			} else {
 				player.jumping = false;
 			}
 		} else {
-			if (!getArround(hitbox.x, hitbox.y + deltaY, hitbox.w, hitbox.h).bottom) {
+			if (!Map.getArround(hitbox.x, hitbox.y + deltaY, hitbox.w, hitbox.h).bottom) {
 				player.move(0, deltaY);
 				player.falling(true);
-			} else if (!getArround(hitbox.x, hitbox.y + deltaX, hitbox.w, hitbox.h).bottom) {
+			} else if (!Map.getArround(hitbox.x, hitbox.y + deltaX, hitbox.w, hitbox.h).bottom) {
 				player.move(0, deltaX);
 				player.falling(true);
 			} else {
@@ -77,9 +81,9 @@ setInterval(function() {
 		}
 	}
 
-	moveEnnemies(deltaX);
+	Map.moveEnnemies(deltaX);
 
-	getCurrents(hitbox.x, hitbox.y, hitbox.w, hitbox.h).forEach(function(t) {
+	Map.getCurrents(hitbox.x, hitbox.y, hitbox.w, hitbox.h).forEach(function(t) {
 		t.element.touch(player, t.direction);
 	});
 }, 33);

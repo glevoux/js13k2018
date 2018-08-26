@@ -13,6 +13,13 @@ var config = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'game.bundle.js'
   },
+  resolve: {
+    alias: {
+      Elements: path.resolve(__dirname, './elements'),
+      Game: path.resolve(__dirname, './game'),
+      Map: path.resolve(__dirname, './map')
+    }
+  },
   module: {
     rules: [
       {

@@ -1,3 +1,8 @@
+import { Decor, Item, Character } from 'Elements';
+import Game from 'Game';
+
+const oMap = {};
+ 
 var map = [
 	['wall1', 'wall1'   , 'wall1'   , 'wall1'   , 'wall1'   , 'wall1'      , 'wall1' , 'wall1'         , 'wall1'         , 'wall1'         , 'wall1'        , 'wall1'],
 	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , ''              , ''              , ''             , 'wall1'],
@@ -43,7 +48,7 @@ for (i = 0; i < map.length; i++) {
 				ennemiesDom.push(tile);
 				domLevel.push({blocking: false});
 			}
-			drawElement(tile);
+			Game.drawElement(tile);
 		} else {
 			domLevel.push({blocking: false});
 		}
@@ -51,7 +56,7 @@ for (i = 0; i < map.length; i++) {
 	domMap.push(domLevel);
 }
 
-function getArround(x, y, w, h) {
+oMap.getArround = function(x, y, w, h) {
 	var currentX = Math.floor(x);
 	var currentY = Math.floor(y);
 
@@ -106,7 +111,7 @@ function getArround(x, y, w, h) {
 	};
 }
 
-function getCurrents(x, y, w, h) {
+oMap.getCurrents = function(x, y, w, h) {
 	var currentX = Math.floor(x);
 	var currentY = Math.floor(y);
 
@@ -190,7 +195,7 @@ function remove(e) {
 	domMap[e.y][e.x] = undefined;
 }
 
-function moveEnnemies(deltaX) {
+oMap.moveEnnemies = function(deltaX) {
 	ennemiesDom.forEach(function(ennemy) {
 		if (ennemy.x < ennemy.baseX - 1 || ennemy.x > ennemy.baseX + 1) {
 			ennemy.direction *= -1;
@@ -204,3 +209,5 @@ function moveEnnemies(deltaX) {
 		ennemy.move(ennemy.direction * deltaX, 0);
 	});
 }
+
+export default oMap;

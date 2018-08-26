@@ -10,6 +10,8 @@
 // - Sprite
 // - 
 
+import Game from 'Game';
+
 class Element {
 	constructor(type, x, y) {
 		this.type = type;
@@ -90,7 +92,7 @@ class Decor extends Element {
 }
 
 function toDom() {
-	return 16 * size;
+	return 16 * Game.size;
 }
 
 class Character extends Element {
@@ -130,8 +132,8 @@ class Character extends Element {
 		super.move(deltaX, deltaY);
 
 		if (this.type === 'player') {
-			gameDom.style.left = parseFloat(gameDom.style.left.split('px')[0]) + (deltaX * toDom() * -1) + 'px';
-			gameDom.style.top = parseFloat(gameDom.style.top.split('px')[0]) + (deltaY * toDom() * -1) + 'px';
+			Game.gameDom.style.left = parseFloat(Game.gameDom.style.left.split('px')[0]) + (deltaX * toDom() * -1) + 'px';
+			Game.gameDom.style.top = parseFloat(Game.gameDom.style.top.split('px')[0]) + (deltaY * toDom() * -1) + 'px';
 		}
 	}
 
@@ -201,7 +203,7 @@ class Item extends Element {
 	touch(e) {
 		if (e.type === 'player') {
 			this.destroy();
-			objectsFound.push(this.type);
+			Game.objectsFound.push(this.type);
 		}
 	}
 }
@@ -210,4 +212,12 @@ class Wifi extends Element {
 	constructor(x, y) {
 		super('0,96,48,16');
 	}
+}
+
+export {
+  Element,
+  Decor,
+  Character,
+  Item,
+  Wifi
 }
