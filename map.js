@@ -13,7 +13,7 @@ var map = [
 	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , ''              , ''              , 'stair flip'   , 'wall1'],
 	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , ''              , 'stair flip'    , 'substair flip', 'wall1'],
 	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , 'stair flip'    , 'substair flip' , 'wall1'        , 'wall1'],
-	['wall1', ''        , ''        , 'ethernet', 'pnj'        , 'wifi-router', ''      , 'stair flip'    , 'substair flip' , 'wall1'         , 'wall1'        , 'wall1'],
+	['wall1', ''        , 'event-1' , 'ethernet', 'pnj'     , 'wifi-router', ''      , 'stair flip'    , 'substair flip' , 'wall1'         , 'wall1'        , 'wall1'],
 	['wall1', 'ground'  , 'ground'  , 'ground'  , 'ground'  , 'ground'     , 'ground', 'substair flip' , 'wall1'         , 'wall1'         , 'wall1'        , 'wall1']
 ];
 
@@ -31,7 +31,7 @@ for (i = 0; i < map.length; i++) {
 	var domLevel = [];
 	for (j = 0; j < level.length; j++) {
 		if (level[j]) {
-			var tile;
+			var tile = undefined;
 			if (decors.includes(level[j])) {
 				tile = new Decor(level[j], j, i);
 				domLevel.push(tile);
@@ -43,7 +43,13 @@ for (i = 0; i < map.length; i++) {
 				ennemiesDom.push(tile);
 				domLevel.push({blocking: false});
 			}
-			drawElement(tile);
+
+			if (tile) {
+				drawElement(tile);
+			}  else if (level[j].indexOf('event') === 0){
+				tile = new GameEvent(level[j].split('-')[1], 'event', j, i);
+				domLevel.push(tile);
+			}
 		} else {
 			domLevel.push({blocking: false});
 		}
@@ -114,26 +120,16 @@ function getCurrents(x, y, w, h) {
 
 	var collapsingTiles = [];
 
-	var pObj = {
-		x,
-		y,
-		w,
-		h
-	};
+	var pObj = {x,y,w,h};
 
 	for (tileX = currentX - 1; tileX <= currentX + 1; tileX++) {
 		for (tileY = currentY - 1; tileY <= currentY + 1; tileY++) {
-			if (!domMap[tileY] || !domMap[tileY][tileX]) {
+			if (!domMap[tileY] || !domMap[tileY][tileX] || !domMap[tileY][tileX].type) {
 				continue;
 			}
-			var tObj = {
-				x: tileX,
-				y: tileY,
-				w: 1,
-				h: 1
-			}
-			var collapsePlace = collapse(pObj, tObj);
-			if (collapsePlace && domMap[tileY][tileX].type) {
+
+			var collapsePlace = collapse(pObj, domMap[tileY][tileX].getHitbox());
+			if (collapsePlace) {
 				collapsingTiles.push({
 					direction: collapsePlace,
 					element: domMap[tileY][tileX]
