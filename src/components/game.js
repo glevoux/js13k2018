@@ -15,6 +15,7 @@ game.drawElement = function(e) {
 	game.gameDom.appendChild(e.dom);
 }
 game.remove = function(e) {
+  console.log(e);
 	game.domMap[e.y][e.x] = undefined;
 }
 game.addObject = function(object) {

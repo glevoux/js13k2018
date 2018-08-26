@@ -36,13 +36,11 @@ menu.drawInventoryItem = function(item) {
 
   newElContainer.appendChild(newEl);
   menu.inventoryEl.appendChild(newElContainer);
-  console.log(menu.inventory);
 }
 menu.setAsTaken = function(id) {
   let elToUpdate = document.getElementById(id);
   elToUpdate.classList.add('taken');
   menu.inventory[id].state = 'taken';
-  console.log(menu.inventory);
 }
 
 // Tape I to open/close the menu
