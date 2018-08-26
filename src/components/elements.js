@@ -209,7 +209,7 @@ class Item extends Element {
 	touch(e) {
 		if (e.type === 'player') {
 			this.destroy();
-			Game.objectsFound.push(this.type);
+			Game.addObject(this.type);
 		}
 	}
 }

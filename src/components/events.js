@@ -18,7 +18,8 @@ oEvent.startEvent = function(event, Item) {
 
 		var list = new Item('list', 7, 4);
 		Game.domMap[4][7] = list;
-		Game.drawElement(list);
+    Game.drawElement(list);
+    Game.removeObject('donut');
 
 		return false;
 	} else {

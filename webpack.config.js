@@ -18,7 +18,8 @@ var config = {
       Elements: path.resolve(__dirname, './src/components/elements'),
       Game: path.resolve(__dirname, './src/components/game'),
       Map: path.resolve(__dirname, './src/components/map'),
-      Events: path.resolve(__dirname, './src/components/events')
+      Events: path.resolve(__dirname, './src/components/events'),
+      Menu: path.resolve(__dirname, './src/components/menu/menu')
     }
   },
   module: {

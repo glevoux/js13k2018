@@ -1,4 +1,5 @@
 .menu {
+  display: none;
   position: fixed;
   top: 1rem;
   right: 1rem;
@@ -6,6 +7,15 @@
   padding: 1rem;
   color: #fff;
   background-color: #78858C;
+
+  &.open {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  &.close {
+    display: block;
+    animation: fadeOut 0.3s ease-in-out;
+  }
 }
 
 .menu__title {
