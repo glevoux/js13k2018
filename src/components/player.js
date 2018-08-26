@@ -16,6 +16,8 @@ Game.gameDom.style.top = targetTop - playerPosition.top - 24 + 'px';
 
 var movementSpeed = 2;
 
+var remainingTime = document.querySelector('.remainingTime');
+
 setInterval(function() {
 	var deltaX = movementSpeed/16;
 	var deltaY = movementSpeed * 2 / 16;
@@ -86,4 +88,13 @@ setInterval(function() {
 	Map.getCurrents(hitbox.x, hitbox.y, hitbox.w, hitbox.h).forEach(function(t) {
 		t.element.touch(player, t.direction);
 	});
+
+	var currentDate = (new Date()).getTime();
+	var time = (30000 - (currentDate - player.lastSelfieTime));
+	if (time < 0) {
+		player.die();
+		remainingTime.innerHTML = 'YOU LOSE';
+	} else {
+		remainingTime.innerHTML = 'Take a selfie before: ' + (time / 1000);
+	}
 }, 33);

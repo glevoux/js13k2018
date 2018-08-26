@@ -106,6 +106,8 @@ class Character extends Element {
 		switch (type) {
 			case 'player':
 				super(type, x, y, true);
+				this.lastSelfieTime = (new Date()).getTime();
+				this.selfieCount = 0;
 				break;
 			case 'pnj':
 				super(`pnj${randomPNJ()} pnj`, x, y, true);
@@ -196,6 +198,14 @@ class Character extends Element {
 
 	takeASelfie() {
 		console.log('Selfie !');
+		this.lastSelfieTime = (new Date()).getTime();
+		this.selfieCount++;
+	}
+
+	die() {
+		if (!this.alreadyDead) {
+			this.alreadyDead = true;
+		}
 	}
 }
 
