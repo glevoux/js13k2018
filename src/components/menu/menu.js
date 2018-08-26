@@ -30,6 +30,7 @@ menu.drawInventoryItem = function(item) {
   let newEl = document.createElement('div');
   newEl.classList = 'inventory__item sprite ' + item.name;
   newEl.id = item.id;
+  newEl.title = item.name;
   if(item.state === 'listed') {
     newEl.innerText = item.name;
   }
@@ -46,7 +47,7 @@ menu.setAsTaken = function(id) {
 // Tape I to open/close the menu
 window.addEventListener('keyup',
   function(e){
-    if(e.keyCode === 73) {
+    if(e.keyCode === 27 || e.keyCode === 73) {
       if(menu.status === 'close') {
         menu.open();
       } else {
