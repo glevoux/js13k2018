@@ -34,9 +34,9 @@ body {
 	top: 90%;
 	left: 0px;
 	height: 10%;
+	width: 100%;
 	color: white;
 	text-align: center;
-	font-size: 2em;
 }
 
 .flip {
