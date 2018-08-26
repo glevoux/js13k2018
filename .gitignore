@@ -1,0 +1,15 @@
+node_modules
+.vscode
+.idea
+.sass-cache
+.editorconfig
+*.orig
+*.log
+*.map
+
+package-lock.json
+tmp
+.DS_Store
+*.swp
+*.swo
+.vscode/
