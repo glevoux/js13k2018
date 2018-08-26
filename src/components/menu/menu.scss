@@ -16,10 +16,35 @@
     display: block;
     animation: fadeOut 0.3s ease-in-out;
   }
+
+  &__title {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid #fff;
+  }
 }
 
-.menu__title {
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.25rem;
-  border-bottom: 1px solid #fff;
+.inventory {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+
+  &__block {
+    flex: 0 0 auto;
+    width: 64px;
+    height: 64px;
+    margin: 0.5rem;
+  }
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.taken {
+      filter: grayscale(100%);
+      -webkit-filter: grayscale(100%);
+    }
+  }
 }

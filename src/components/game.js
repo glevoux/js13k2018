@@ -17,14 +17,19 @@ game.drawElement = function(e) {
 game.remove = function(e) {
 	game.domMap[e.y][e.x] = undefined;
 }
-game.addObject = function(newObject) {
+game.addObject = function(object) {
   let newId = makeid();
-  game.objectsFound[newObject] = newId;
-  Menu.addItemToInvent(newObject, newId);
+  let newObject = {
+    name: object,
+    id: newId
+  }
+  game.objectsFound.push(newObject);
+  Menu.addItemToInvent(object, newId);
 }
 game.removeObject = function(object) {
   for(var i = game.objectsFound.length - 1; i >= 0; i--) {
-    if(game.objectsFound[i] === object) {
+    if(game.objectsFound[i].name === object) {
+      Menu.setAsTaken(game.objectsFound[i].id);
       game.objectsFound.splice(i, 1);
       return;
     }

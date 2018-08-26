@@ -24,11 +24,24 @@ menu.addItemToInvent = function(item, id) {
   menu.drawInventoryItem(newItem);
 }
 menu.drawInventoryItem = function(item) {
-  let newEl = document.createElement('li');
-  newEl.classList.add('inventory__item');
+  let newElContainer = document.createElement('li');
+  newElContainer.classList.add('inventory__block');
+
+  let newEl = document.createElement('div');
+  newEl.classList = 'inventory__item sprite ' + item.name;
   newEl.id = item.id;
-  newEl.innerText = item.name;
-  menu.inventoryEl.appendChild(newEl);
+  if(item.state === 'listed') {
+    newEl.innerText = item.name;
+  }
+
+  newElContainer.appendChild(newEl);
+  menu.inventoryEl.appendChild(newElContainer);
+  console.log(menu.inventory);
+}
+menu.setAsTaken = function(id) {
+  let elToUpdate = document.getElementById(id);
+  elToUpdate.classList.add('taken');
+  menu.inventory[id].state = 'taken';
   console.log(menu.inventory);
 }
 
