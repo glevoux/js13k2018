@@ -10,7 +10,7 @@ var events = [
 
 var talks = document.querySelector('.talks');
 oEvent.startEvent = function(event, Item, timeLimit) {
-	if (event.id === '1' && !Game.objectsFound.includes('donut')) {
+	if (event.id === '1' && Game.objectsFound['donut'] !== undefined) {
 		talks.innerHTML = '<h1>' + events[event.id] + '<h1>';
 		return false;
 	} else if (event.id === '1') {

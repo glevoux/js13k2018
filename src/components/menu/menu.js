@@ -15,9 +15,9 @@ menu.close = function() {
     menu.status = 'close';
   }, 300);
 }
-menu.addItemToInvent = function(item) {
+menu.addItemToInvent = function(item, id) {
   let newItem = {};
-  newItem.id = makeid();
+  newItem.id = id;
   newItem.name = item;
   newItem.state = '';
   menu.inventory[newItem.id] = newItem;
@@ -30,16 +30,6 @@ menu.drawInventoryItem = function(item) {
   newEl.innerText = item.name;
   menu.inventoryEl.appendChild(newEl);
   console.log(menu.inventory);
-}
-
-function makeid() {
-  let text = "";
-  let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-  for (var i = 0; i < 5; i++)
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-  return text;
 }
 
 // Tape I to open/close the menu

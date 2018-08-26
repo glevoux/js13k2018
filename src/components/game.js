@@ -18,8 +18,9 @@ game.remove = function(e) {
 	game.domMap[e.y][e.x] = undefined;
 }
 game.addObject = function(newObject) {
-  game.objectsFound.push(newObject);
-  Menu.addItemToInvent(newObject);
+  let newId = makeid();
+  game.objectsFound[newObject] = newId;
+  Menu.addItemToInvent(newObject, newId);
 }
 game.removeObject = function(object) {
   for(var i = game.objectsFound.length - 1; i >= 0; i--) {
@@ -28,6 +29,16 @@ game.removeObject = function(object) {
       return;
     }
   }
+}
+
+function makeid() {
+  let text = "";
+  let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (var i = 0; i < 5; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
 }
 
 window.addEventListener("keydown",
