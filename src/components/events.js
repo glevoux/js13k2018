@@ -9,7 +9,7 @@ var events = [
 ];
 
 var talks = document.querySelector('.talks');
-oEvent.startEvent = function(event, Item) {
+oEvent.startEvent = function(event, Item, timeLimit) {
 	if (event.id === '1' && !Game.objectsFound.includes('donut')) {
 		talks.innerHTML = '<h1>' + events[event.id] + '<h1>';
 		return false;
@@ -23,7 +23,9 @@ oEvent.startEvent = function(event, Item) {
 		return false;
 	} else {
 		talks.innerHTML = '<h1>' + events[event.id] + '<h1>';
-		// setTimeout(() => talks.innerHTML = '', 5000);
+		if (timeLimit) {
+			timeout = setTimeout(() => talks.innerHTML = '', timeLimit);
+		}
 		return true;
 	}
 }

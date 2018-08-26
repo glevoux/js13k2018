@@ -1,4 +1,4 @@
-import { Decor, Item, Character, GameEvent } from 'Elements';
+import { Decor, Item, Character, Wifi, GameEvent } from 'Elements';
 import Game from 'Game';
 
 const oMap = {};
@@ -17,8 +17,8 @@ var map = [
 	['wall1', 'wall1'   , 'wall1'   , 'wall1'   , 'substair', 'ground'     , 'ground', 'ground'        , 'ground'        , ''              , ''             , 'wall1'],
 	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , ''              , ''              , 'stair flip'   , 'wall1'],
 	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , ''              , 'stair flip'    , 'substair flip', 'wall1'],
-	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , 'stair flip'    , 'substair flip' , 'wall1'        , 'wall1'],
-	['wall1', ''        , 'event-0' , 'ethernet', 'pnj'     , 'wifi-router', ''      , 'stair flip'    , 'substair flip' , 'wall1'         , 'wall1'        , 'wall1'],
+	['wall1', ''        , ''        , ''        , ''        , 'wifi'       , ''      , ''              , 'stair flip'    , 'substair flip' , 'wall1'        , 'wall1'],
+	['wall1', ''        , '' , 'ethernet', ''     , ''           , ''      , 'stair flip'    , 'substair flip' , 'wall1'         , 'wall1'        , 'wall1'],
 	['wall1', 'ground'  , 'ground'  , 'ground'  , 'ground'  , 'ground'     , 'ground', 'substair flip' , 'wall1'         , 'wall1'         , 'wall1'        , 'wall1']
 ];
 
@@ -46,6 +46,9 @@ for (i = 0; i < map.length; i++) {
 				tile = new Character('pnj', j, i);
 				ennemiesDom.push(tile);
 				domLevel.push({blocking: false});
+			} else if (level[j] === 'wifi') {
+				tile = new Wifi(j, i);
+				domLevel.push(tile);
 			}
 
 			if (tile) {
