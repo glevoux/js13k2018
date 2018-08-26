@@ -11,6 +11,7 @@
 // - 
 
 import Game from 'Game';
+import Events from 'Events';
 
 class Element {
 	constructor(type, x, y, draw) {
@@ -55,7 +56,7 @@ class Element {
 		if (this.draw) {
 			this.dom.remove();
 		}
-		remove(this);
+		Game.remove(this);
 	}
 }
 
@@ -229,7 +230,7 @@ class GameEvent extends Element{
 	}
 
 	touch(e) {
-		if (startEvent(this)) {
+		if (Events.startEvent(this, Item)) {
 			console.log('Destruction !');
 			this.destroy();
 		}
@@ -247,5 +248,6 @@ export {
   Decor,
   Character,
   Item,
+  GameEvent,
   Wifi
 }

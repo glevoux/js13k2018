@@ -1,4 +1,4 @@
-import { Decor, Item, Character } from 'Elements';
+import { Decor, Item, Character, GameEvent } from 'Elements';
 import Game from 'Game';
 
 const oMap = {};
@@ -23,7 +23,6 @@ var map = [
 ];
 
 var i, j;
-var domMap = [];
 
 var decors = ['wall1', 'ground', 'substair', 'stair', 'stair flip', 'substair flip'];
 var items = ['ethernet', 'wifi-router', 'power', 'key', 'donut', 'list'];
@@ -59,7 +58,7 @@ for (i = 0; i < map.length; i++) {
 			domLevel.push({blocking: false});
 		}
 	}
-	domMap.push(domLevel);
+	Game.domMap.push(domLevel);
 }
 
 oMap.getArround = function(x, y, w, h) {
@@ -82,7 +81,7 @@ oMap.getArround = function(x, y, w, h) {
 
 	for (tileX = currentX - 1; tileX <= currentX + 1; tileX++) {
 		for (tileY = currentY - 1; tileY <= currentY + 1; tileY++) {
-			if (!domMap[tileY] || !domMap[tileY][tileX]) {
+			if (!Game.domMap[tileY] || !Game.domMap[tileY][tileX]) {
 				continue;
 			}
 			var tObj = {
@@ -91,7 +90,7 @@ oMap.getArround = function(x, y, w, h) {
 				w: 1,
 				h: 1
 			}
-			var isCollapsing = collapse(pObj, tObj) && domMap[tileY][tileX].blocking;
+			var isCollapsing = collapse(pObj, tObj) && Game.domMap[tileY][tileX].blocking;
 			if (isCollapsing) {
 				if (tileX <= currentX) {
 					left = true;
@@ -129,15 +128,15 @@ oMap.getCurrents = function(x, y, w, h) {
 
 	for (tileX = currentX - 1; tileX <= currentX + 1; tileX++) {
 		for (tileY = currentY - 1; tileY <= currentY + 1; tileY++) {
-			if (!domMap[tileY] || !domMap[tileY][tileX] || !domMap[tileY][tileX].type) {
+			if (!Game.domMap[tileY] || !Game.domMap[tileY][tileX] || !Game.domMap[tileY][tileX].type) {
 				continue;
 			}
 
-			var collapsePlace = collapse(pObj, domMap[tileY][tileX].getHitbox());
+			var collapsePlace = collapse(pObj, Game.domMap[tileY][tileX].getHitbox());
 			if (collapsePlace) {
 				collapsingTiles.push({
 					direction: collapsePlace,
-					element: domMap[tileY][tileX]
+					element: Game.domMap[tileY][tileX]
 				});
 			}
 		}
@@ -185,10 +184,6 @@ function collapse(obj1, obj2) {
 	}
 
 	return false;
-}
-
-function remove(e) {
-	domMap[e.y][e.x] = undefined;
 }
 
 oMap.moveEnnemies = function(deltaX) {

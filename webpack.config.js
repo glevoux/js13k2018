@@ -15,9 +15,10 @@ var config = {
   },
   resolve: {
     alias: {
-      Elements: path.resolve(__dirname, './elements'),
-      Game: path.resolve(__dirname, './game'),
-      Map: path.resolve(__dirname, './map')
+      Elements: path.resolve(__dirname, './src/components/elements'),
+      Game: path.resolve(__dirname, './src/components/game'),
+      Map: path.resolve(__dirname, './src/components/map'),
+      Events: path.resolve(__dirname, './src/components/events')
     }
   },
   module: {
@@ -64,6 +65,17 @@ var config = {
             }
           }
         ]
+      },
+      {
+        test: /\.jpe?g$|\.gif$|\.png$|\.wav$|\.mp3$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            context: 'public/images/',
+            name: '[path][name].[ext]',
+            outputPath: 'images/'
+          }
+        }
       }
     ]
   },
