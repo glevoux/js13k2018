@@ -132,15 +132,23 @@ function getCurrents(x, y, w, h) {
 				w: 1,
 				h: 1
 			}
-			if (collapse(pObj, tObj) && domMap[tileY][tileX].type) {
-				collapsingTiles.push(domMap[tileY][tileX]);
+			var collapsePlace = collapse(pObj, tObj);
+			if (collapsePlace && domMap[tileY][tileX].type) {
+				collapsingTiles.push({
+					direction: collapsePlace,
+					element: domMap[tileY][tileX]
+				});
 			}
 		}
 	}
 
 	ennemiesDom.forEach(function(ennemy) {
-		if (collapse(ennemy.getHitbox(), pObj)) {
-			collapsingTiles.push(ennemy);
+		var collapsePlace = collapse(ennemy.getHitbox(), pObj);
+		if (collapsePlace) {
+			collapsingTiles.push({
+				direction: collapsePlace,
+				element: ennemy
+			});
 		}
 	});
 
@@ -150,14 +158,32 @@ function getCurrents(x, y, w, h) {
 function collapse(obj1, obj2) {
 	var isCollapsing = false;
 
-	var xCollapse = (obj1.x <= obj2.x && obj1.x + obj1.w > obj2.x)
-				 || (obj2.x <= obj1.x && obj2.x + obj2.w > obj1.x);
+	var xCollapseRight = (obj1.x <= obj2.x && obj1.x + obj1.w > obj2.x);
+	var xCollapseLeft = (obj2.x <= obj1.x && obj2.x + obj2.w > obj1.x);
 
-	var yCollapse = (obj1.y <= obj2.y && obj1.y + obj1.h > obj2.y)
-				 || (obj2.y <= obj1.y && obj2.y + obj2.h > obj1.y);
+	var yCollapseTop = (obj1.y <= obj2.y && obj1.y + obj1.h > obj2.y);
+	var yCollapseBottom	= (obj2.y <= obj1.y && obj2.y + obj2.h > obj1.y);
 
-	// console.log(JSON.stringify(obj1), JSON.stringify(obj2), xCollapse, yCollapse);
-	return xCollapse && yCollapse;
+	if ((xCollapseLeft || xCollapseRight) && (yCollapseTop || yCollapseBottom)) {
+		var collapsePlace = [];
+		if (xCollapseLeft) {
+			collapsePlace.push('left');
+		}
+		if (xCollapseRight) {
+			collapsePlace.push('right');
+		}
+		if (yCollapseTop) {
+			collapsePlace.push('top');
+		}
+		if (yCollapseBottom) {
+			collapsePlace.push('bottom');
+		}
+
+		// console.log(JSON.stringify(obj1), JSON.stringify(obj2), xCollapse, yCollapse);
+		return collapsePlace.join('-');
+	}
+
+	return false;
 }
 
 function remove(e) {

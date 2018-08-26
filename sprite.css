@@ -37,6 +37,9 @@
 .sprite.player.walking-left, .sprite.player.walking-right {
 	animation: 0.3s infinite walk step-end;
 }
+.sprite.player.hurted-left, .sprite.player.hurted-right {
+	background-position-x: calc(-64px * var(--size));
+}
 
 @keyframes walk {
 	0%, 20% {
