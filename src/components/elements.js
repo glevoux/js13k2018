@@ -192,7 +192,6 @@ class Character extends Element {
 			} else {
 				e.startHurt('right');
 			}
-			
 		}
 	}
 
