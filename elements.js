@@ -13,19 +13,22 @@
 import Game from 'Game';
 
 class Element {
-	constructor(type, x, y) {
+	constructor(type, x, y, draw) {
 		this.type = type;
 		this.x = x;
 		this.y = y;
 
-		this.dom = document.createElement('div');
-		this.type.split(' ').forEach(t => this.dom.classList.add(t));
-		
-		this.dom.classList.add('sprite');
+		this.draw = draw;
 
-		this.dom.style.top = this.y * toDom() + 'px';
-		this.dom.style.left = this.x * toDom() + 'px';
+		if (this.draw) {
+			this.dom = document.createElement('div');
+			this.type.split(' ').forEach(t => this.dom.classList.add(t));
+			
+			this.dom.classList.add('sprite');
 
+			this.dom.style.top = this.y * toDom() + 'px';
+			this.dom.style.left = this.x * toDom() + 'px';
+		}
 		this.isRendered = false;
 	}
 
@@ -49,14 +52,16 @@ class Element {
 	}
 
 	destroy() {
-		this.dom.remove();
+		if (this.draw) {
+			this.dom.remove();
+		}
 		remove(this);
 	}
 }
 
 class Decor extends Element {
 	constructor(type, x, y) {
-		super(type, x, y);
+		super(type, x, y, true);
 		if (this.type.indexOf('stair') === -1) {
 			this.blocking = true;
 		}
@@ -99,10 +104,10 @@ class Character extends Element {
 	constructor(type, x, y) {
 		switch (type) {
 			case 'player':
-				super(type, x, y);
+				super(type, x, y, true);
 				break;
 			case 'pnj':
-				super(`pnj${randomPNJ()} pnj`, x, y);
+				super(`pnj${randomPNJ()} pnj`, x, y, true);
 				this.baseX = x;
 				this.direction = Math.floor(Math.random() * 2) === 0 ? -1 : 1;
 				break;
@@ -195,7 +200,7 @@ function randomPNJ() {
 
 class Item extends Element {
 	constructor(type, x, y) {
-		super(type, x, y);
+		super(type, x, y, true);
 
 		this.dom.classList.add('item');
 	}
@@ -204,6 +209,28 @@ class Item extends Element {
 		if (e.type === 'player') {
 			this.destroy();
 			Game.objectsFound.push(this.type);
+		}
+	}
+}
+
+class GameEvent extends Element{
+	constructor(id, type, x, y) {
+		super(type, x, y, false);
+		this.id = id;
+	}
+
+	getHitbox() {
+		return {
+			x: this.x,
+			y: this.y - 2,
+			w: 1,
+			h: 3
+		};
+	}
+
+	touch(e) {
+		if (startEvent(this.id)) {
+			this.destroy();
 		}
 	}
 }
