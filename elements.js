@@ -126,6 +126,15 @@ class Character extends Element {
 		}
 	}
 
+	move(deltaX, deltaY) {
+		super.move(deltaX, deltaY);
+
+		if (this.type === 'player') {
+			gameDom.style.left = parseFloat(gameDom.style.left.split('px')[0]) + (deltaX * toDom() * -1) + 'px';
+			gameDom.style.top = parseFloat(gameDom.style.top.split('px')[0]) + (deltaY * toDom() * -1) + 'px';
+		}
+	}
+
 	startJump() {
 		if (this.jumping) {
 			return;

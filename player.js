@@ -1,5 +1,14 @@
 var player = new Character('player', 1, 11);
 drawElement(player);
+var playerPosition = player.dom.getBoundingClientRect();
+var screenWidth = window.innerWidth;
+var screenHeight = window.innerHeight;
+
+var targetLeft = screenWidth / 2;
+var targetTop = screenHeight / 2;
+
+gameDom.style.left = targetLeft - playerPosition.left - 24 + 'px';
+gameDom.style.top = targetTop - playerPosition.top - 24 + 'px';
 
 var movementSpeed = 2;
 

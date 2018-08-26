@@ -13,7 +13,7 @@ var map = [
 	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , ''              , ''              , 'stair flip'   , 'wall1'],
 	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , ''              , 'stair flip'    , 'substair flip', 'wall1'],
 	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , 'stair flip'    , 'substair flip' , 'wall1'        , 'wall1'],
-	['wall1', ''        , ''        , 'ethernet', ''        , 'wifi-router', ''      , 'stair flip'    , 'substair flip' , 'wall1'         , 'wall1'        , 'wall1'],
+	['wall1', ''        , ''        , 'ethernet', 'pnj'        , 'wifi-router', ''      , 'stair flip'    , 'substair flip' , 'wall1'         , 'wall1'        , 'wall1'],
 	['wall1', 'ground'  , 'ground'  , 'ground'  , 'ground'  , 'ground'     , 'ground', 'substair flip' , 'wall1'         , 'wall1'         , 'wall1'        , 'wall1']
 ];
 

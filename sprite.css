@@ -34,7 +34,7 @@
 .sprite.player.falling {
 	background-position-x: calc(-80px * var(--size)) !important;
 }
-.sprite.player.walking-left, .sprite.player.walking-right {
+.sprite.player.walking-left:not(.falling), .sprite.player.walking-right:not(.falling) {
 	animation: 0.3s infinite walk step-end;
 }
 .sprite.player.hurted-left, .sprite.player.hurted-right {

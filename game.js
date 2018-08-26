@@ -1,6 +1,8 @@
 var size = 4;
 
 var gameDom = document.querySelector('.game');
+gameDom.style.left = '0px';
+gameDom.style.top = '0px';
 
 var keys = {};
 
