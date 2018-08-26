@@ -204,7 +204,6 @@ class Character extends Element {
 
 	die() {
 		if (!this.alreadyDead) {
-			alert('Loooser');
 			this.alreadyDead = true;
 		}
 	}
