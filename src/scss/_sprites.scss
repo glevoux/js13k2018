@@ -150,6 +150,7 @@
 }
 .sprite.wifi.bandwidth-0:after {
 	opacity: 0;
+	animation: none;
 }
 .sprite.wifi.bandwidth-1 {
 	background-position-x: calc(-16px * var(--size));
