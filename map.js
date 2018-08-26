@@ -3,7 +3,7 @@ var map = [
 	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , ''              , ''              , ''             , 'wall1'],
 	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , ''              , ''              , ''             , 'wall1'],
 	['wall1', ''        , ''        , ''        , ''        , ''           , ''      , ''              , ''              , ''              , ''             , 'wall1'],
-	['wall1', ''        , ''        , ''        , 'donut'   , 'pnj'        , 'list'  , ''              , ''              , ''              , ''             , 'wall1'],
+	['wall1', ''        , ''        , ''        , 'donut'   , 'pnj'        , ''      , ''              , ''              , 'event-1'       , ''             , 'wall1'],
 	['wall1', ''        , ''        , 'ground'  , 'ground'  , 'ground'     , 'ground', 'ground'        , 'ground'        , 'ground'        , 'ground'       , 'wall1'],
 	['wall1', 'stair'   , ''        , ''        , ''        , ''           , ''      , ''              , ''              , ''              , ''             , 'wall1'],
 	['wall1', 'substair', 'stair'   , ''        , ''        , ''           , ''      , ''              , ''              , ''              , ''             , 'wall1'],

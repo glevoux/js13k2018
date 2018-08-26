@@ -227,7 +227,8 @@ class GameEvent extends Element{
 	}
 
 	touch(e) {
-		if (startEvent(this.id)) {
+		if (startEvent(this)) {
+			console.log('Destruction !');
 			this.destroy();
 		}
 	}
