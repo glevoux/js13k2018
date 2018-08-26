@@ -2,7 +2,7 @@ import { Character } from 'Elements';
 import Game from 'Game';
 import Map from 'Map';
 
-var player = new Character('player', 1, 11);
+var player = new Character('player', 5, 14);
 Game.drawElement(player);
 var playerPosition = player.dom.getBoundingClientRect();
 var screenWidth = window.innerWidth;
