@@ -132,7 +132,19 @@
 	border-top-right-radius: 100%;
 	background-color: blue;
 	opacity: 0.1;
+	animation: blink 1s ease-in-out infinite alternate;
 }
+
+@keyframes blink {
+	from {
+		opacity: 0.05;
+	}
+
+	to {
+		opacity: 0.1;
+	}
+}
+
 .sprite.wifi.bandwidth-0 {
 	background-position-x: 0;
 }
