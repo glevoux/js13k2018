@@ -23,6 +23,13 @@
 	background-position: calc(-16px * var(--size)) 0;
 }
 
+.sprite.it1 {
+  background-position: calc(-64px * var(--size)) 0;
+}
+.sprite.it2 {
+  background-position: calc(-80px * var(--size)) 0;
+}
+
 .sprite.player {
 	background-position-x: 0;
 	background-position-y: calc(-16px * var(--size));
