@@ -110,7 +110,7 @@ class Character extends Element {
 	}
 
 	currentMovement(movement) {
-		var movements = ['walking-left', 'walking-right', 'hurted'];
+		var movements = ['walking-left', 'walking-right', 'hurted-left', 'hurted-right'];
 		movements.forEach(m => {
 			if (m !== movement) {
 				this.dom.classList.remove(m);
@@ -119,10 +119,19 @@ class Character extends Element {
 			}
 		});
 
-		if (movement === 'walking-left') {
+		if (movement === 'walking-left' || movement === 'hurted-right') {
 			this.dom.classList.add('flip');
-		} else if (movement === 'walking-right') {
+		} else if (movement === 'walking-right' || movement === 'hurted-left') {
 			this.dom.classList.remove('flip');
+		}
+	}
+
+	move(deltaX, deltaY) {
+		super.move(deltaX, deltaY);
+
+		if (this.type === 'player') {
+			gameDom.style.left = parseFloat(gameDom.style.left.split('px')[0]) + (deltaX * toDom() * -1) + 'px';
+			gameDom.style.top = parseFloat(gameDom.style.top.split('px')[0]) + (deltaY * toDom() * -1) + 'px';
 		}
 	}
 
@@ -132,6 +141,20 @@ class Character extends Element {
 		}
 
 		this.jumping = (new Date()).getTime();
+	}
+
+	startHurt(direction) {
+		if (this.hurted) {
+			return;
+		}
+
+		this.hurted = (new Date()).getTime() + '-' + direction;
+		this.currentMovement('hurted-'+direction);
+	}
+
+	endHurt() {
+		this.hurted = false;
+		this.currentMovement();
 	}
 
 	falling(isFalling) {
@@ -152,9 +175,14 @@ class Character extends Element {
 		};
 	}
 
-	touch(e) {
+	touch(e, direction) {
 		if (e.type === 'player') {
-			console.log('Ouch !');
+			if (direction.indexOf('left') !== -1) {
+				e.startHurt('left');
+			} else {
+				e.startHurt('right');
+			}
+			
 		}
 	}
 }
