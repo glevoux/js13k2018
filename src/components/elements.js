@@ -193,6 +193,10 @@ class Character extends Element {
 			
 		}
 	}
+
+	takeASelfie() {
+		console.log('Selfie !');
+	}
 }
 
 function randomPNJ() {
@@ -239,7 +243,50 @@ class GameEvent extends Element{
 
 class Wifi extends Element {
 	constructor(x, y) {
-		super('0,96,48,16');
+		super('wifi', x, y, true);
+		this.bandwidth = 4;
+		this.consumeDate = false;
+		this.date = (new Date()).getTime();
+	}
+
+	getHitbox() {
+		return {
+			x: this.x - 2,
+			y: this.y - 1,
+			w: 5,
+			h: 3
+		}
+	}
+
+	touch(e) {
+		if (e.type !== 'player') {
+			return;
+		}
+		var newDate = (new Date()).getTime();
+		if (this.bandwidth > 0 && Game.keys[32] && newDate - 1000 > this.date) {
+			e.takeASelfie();
+			this.bandwidth--;
+			this.date = newDate;
+
+			this.dom.classList.remove('bandwidth-0');
+			this.dom.classList.remove('bandwidth-1');
+			this.dom.classList.remove('bandwidth-2');
+			this.dom.classList.remove('bandwidth-3');
+			this.dom.classList.remove('bandwidth-4');
+
+			this.dom.classList.add('bandwidth-' + this.bandwidth);
+
+			if (this.bandwidth === 0) {
+				setTimeout(() => {
+					this.bandwidth = 4;
+					this.dom.classList.remove('bandwidth-0');
+					this.dom.classList.remove('bandwidth-1');
+					this.dom.classList.remove('bandwidth-2');
+					this.dom.classList.remove('bandwidth-3');
+					this.dom.classList.remove('bandwidth-4');
+				}, 20000);
+			}
+		}
 	}
 }
 
