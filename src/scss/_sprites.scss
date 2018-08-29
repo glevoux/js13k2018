@@ -22,6 +22,21 @@
 .sprite.substair {
 	background-position: calc(-16px * var(--size)) 0;
 }
+.sprite.flower {
+  background-position: calc(-96px * var(--size)) 0;
+}
+.sprite.door {
+  background-position: calc(-112px * var(--size)) 0;
+}
+.sprite.desktop {
+  background-position: calc(-48px * var(--size)) calc(-32px * var(--size));
+}
+.sprite.bed {
+  background-position: calc(-64px * var(--size)) calc(-32px * var(--size));
+}
+.sprite.it-plate {
+  background-position: calc(-48px * var(--size)) calc(-48px * var(--size));
+}
 
 .sprite.it1 {
   background-position: calc(-64px * var(--size)) 0;
