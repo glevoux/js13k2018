@@ -105,9 +105,4 @@ setInterval(function() {
 	} else {
 		remainingTime.innerHTML = 'Take a selfie before: ' + (time / 1000);
 	}
-
-	if (player.x % 0.125 !== 0) {
-		console.log('There !');
-		player.move(-player.x % 0.125, 0);
-	}
 }, 33);
