@@ -199,6 +199,11 @@ class Character extends Element {
 		this.lastSelfieTime = (new Date()).getTime();
 		this.selfieCount++;
 
+		if (this.dom.classList.contains('flip')) {
+			document.querySelector('.flash').classList.add('flip');
+		} else {
+			document.querySelector('.flash').classList.remove('flip');
+		}
 		document.body.classList.add('flash-it');
 		setTimeout(() => document.body.classList.remove('flash-it'), 200);
 	}
