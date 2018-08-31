@@ -50,3 +50,36 @@ body {
 .flip {
 	transform: scaleX(-1);
 }
+
+.you-are-dead {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: black;
+	opacity: 0;
+	color: white;
+
+	transition: opacity 1s;
+
+	text-align: center;
+	font-size: 3em;
+}
+.you-are-dead .centered-content {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+
+	transform: translate(-50%, -50%);
+}
+.you-are-dead.very-dead {
+	opacity: 1;
+}
+
+.retry {
+	border: 2px solid white;
+	display: inline-block;
+	padding: 5px;
+	cursor: pointer;
+}

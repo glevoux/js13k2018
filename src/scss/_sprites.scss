@@ -43,6 +43,9 @@
 .sprite.player.hurted-left, .sprite.player.hurted-right {
 	background-position-x: calc(-64px * var(--size));
 }
+.sprite.player.dead {
+	background-position-x: calc(-112px * var(--size));
+}
 
 @keyframes walk {
 	0%, 20% {
@@ -170,3 +173,4 @@
 .sprite.wifi.bandwidth-3 {
 	background-position-x: calc(-48px * var(--size));
 }
+

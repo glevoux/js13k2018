@@ -120,7 +120,7 @@ class Character extends Element {
 	}
 
 	currentMovement(movement) {
-		var movements = ['walking-left', 'walking-right', 'hurted-left', 'hurted-right'];
+		var movements = ['walking-left', 'walking-right', 'hurted-left', 'hurted-right', 'dead'];
 		movements.forEach(m => {
 			if (m !== movement) {
 				this.dom.classList.remove(m);
@@ -205,6 +205,7 @@ class Character extends Element {
 		if (!this.alreadyDead) {
 			this.alreadyDead = true;
 		}
+		this.currentMovement('dead');
 	}
 }
 

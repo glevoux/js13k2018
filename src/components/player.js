@@ -17,8 +17,14 @@ Game.gameDom.style.top = targetTop - playerPosition.top - 24 + 'px';
 var movementSpeed = 2;
 
 var remainingTime = document.querySelector('.remainingTime');
+var youAreDead = document.querySelector('.you-are-dead');
+
+var stop = false;
 
 setInterval(function() {
+	if (stop) {
+		return;
+	}
 	var deltaX = movementSpeed/16;
 	var deltaY = movementSpeed * 2 / 16;
 
@@ -94,6 +100,8 @@ setInterval(function() {
 	if (time < 0) {
 		player.die();
 		remainingTime.innerHTML = 'YOU LOSE';
+		youAreDead.classList.add('very-dead');
+		stop = true;
 	} else {
 		remainingTime.innerHTML = 'Take a selfie before: ' + (time / 1000);
 	}
