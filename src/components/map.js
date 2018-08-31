@@ -38,7 +38,7 @@ var map = [
 
 var i, j;
 
-var decors = ['wall1', 'ground', 'substair', 'stair', 'stair flip', 'substair flip', 'it1', 'it2'];
+var decors = ['wall1', 'ground', 'substair', 'stair', 'stair flip', 'substair flip', 'it1', 'it2', 'it-plate', 'desktop', 'bed', 'door', 'flower'];
 var items = ['ethernet', 'wifirouter', 'power', 'key', 'donut', 'list'];
 var ennemies = ['pnj'];
 
