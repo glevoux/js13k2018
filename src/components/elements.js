@@ -196,9 +196,11 @@ class Character extends Element {
 	}
 
 	takeASelfie() {
-		console.log('Selfie !');
 		this.lastSelfieTime = (new Date()).getTime();
 		this.selfieCount++;
+
+		document.body.classList.add('flash-it');
+		setTimeout(() => document.body.classList.remove('flash-it'), 200);
 	}
 
 	die() {
