@@ -29,6 +29,7 @@ oEvent.startEvent = function(event, Item, timeLimit) {
 		event.id = 5;
 		return false;
 	} else if (event.id === 2) {
+		talks.innerHTML = '<h1>' + events[event.id] + '<h1>';
 		return false;
 	} else {
 		talks.innerHTML = '<h1>' + events[event.id] + '<h1>';
