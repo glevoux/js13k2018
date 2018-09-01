@@ -94,6 +94,8 @@ body {
   background-color: white;
   opacity: 0;
   transition: opacity 0.1s;
+
+  pointer-events: none;
 }
 .flash::after {
   content: '';
