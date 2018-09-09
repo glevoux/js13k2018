@@ -2,4 +2,4 @@
 
 2018 entry for JS13k
 
-## How I Save The Internet
+## How I Saved The Internet
