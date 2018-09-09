@@ -15,6 +15,7 @@ var config = {
   },
   resolve: {
     alias: {
+      Utils: path.resolve(__dirname, './src/components/utils'),
       Elements: path.resolve(__dirname, './src/components/elements'),
       Game: path.resolve(__dirname, './src/components/game'),
       Map: path.resolve(__dirname, './src/components/map'),

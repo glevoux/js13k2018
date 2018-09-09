@@ -1,3 +1,4 @@
+import Utils from 'Utils';
 import Menu from 'Menu';
 
 const game = {};
@@ -19,7 +20,7 @@ game.remove = function(e) {
 	game.domMap[e.y][e.x] = undefined;
 }
 game.addObject = function(object) {
-  let newId = makeid();
+  let newId = Utils.makeId();
   let newObject = {
     name: object,
     id: newId
@@ -35,16 +36,6 @@ game.removeObject = function(object) {
       return;
     }
   }
-}
-
-function makeid() {
-  let text = "";
-  let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-  for (var i = 0; i < 5; i++)
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-  return text;
 }
 
 window.addEventListener("keydown",

@@ -69,58 +69,50 @@ progress[value] {
 }
 
 .you-are-dead {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: black;
-  opacity: 0;
   color: white;
-
-  transition: opacity 1s;
-
-  text-align: center;
+  background-color: black;
   font-size: 3em;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
 }
 .you-are-dead .centered-content {
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
 
   transform: translate(-50%, -50%);
 }
 .you-are-dead.very-dead {
-  opacity: 1;
+  display: block;
 }
 
 .you-win {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   background-color: black;
-  opacity: 0;
   color: white;
-
-  transition: opacity 1s;
-
-  text-align: center;
   font-size: 3em;
-
-  display: none;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
 }
 .you-win .centered-content {
   position: absolute;
-  left: 50%;
   top: 50%;
-
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 .you-win.very-win {
   display: block;
-  opacity: 1;
 }
 
 .retry {
