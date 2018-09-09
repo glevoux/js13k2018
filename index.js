@@ -1,3 +1,4 @@
+require('./src/components/utils.js');
 require('./src/components/game.js');
 require('./src/components/elements.js');
 require('./src/components/player.js');

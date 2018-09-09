@@ -50,7 +50,6 @@ progress[value] {
   position: absolute;
   width: 3500px;
   height: 1600px;
-
   overflow: hidden;
 }
 
@@ -74,17 +73,15 @@ progress[value] {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: black;
   color: white;
-
-  text-align: center;
+  background-color: black;
   font-size: 3em;
+  text-align: center;
 }
 .start-screen .centered-content {
   position: absolute;
-  left: 50%;
   top: 50%;
-
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 
@@ -148,11 +145,9 @@ progress[value] {
   position: absolute;
   top: 0;
   left: 0;
-
   background-color: white;
   opacity: 0;
   transition: opacity 0.1s;
-
   pointer-events: none;
 }
 .flash::after {
@@ -162,14 +157,13 @@ progress[value] {
   top: 50%;
   width: 800px;
   height: 800px;
-
-  transform: translate(-50%, -50%);
   background-image: url(./assets/sprites.png);
   background-repeat: no-repeat;
   background-size: calc(128px * 50) calc(112px * 50);
   image-rendering: pixelated;
   background-position-x: calc(-96px * 50);
   background-position-y: calc(-16px * 50);
+  transform: translate(-50%, -50%);
 }
 body.flash-it .flash {
   opacity: 1;
