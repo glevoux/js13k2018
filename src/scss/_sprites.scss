@@ -40,6 +40,15 @@
 .sprite.it-plate {
   background-position: calc(-64px * var(--size)) calc(-48px * var(--size));
 }
+.sprite.art1 {
+  background-position: calc(-80px * var(--size)) calc(-32px * var(--size));
+}
+.sprite.art2 {
+  background-position: calc(-96px * var(--size)) calc(-32px * var(--size));
+}
+.sprite.art3 {
+  background-position: calc(-112px * var(--size)) calc(-32px * var(--size));
+}
 
 .sprite.it1 {
   background-position: calc(-64px * var(--size)) 0;
