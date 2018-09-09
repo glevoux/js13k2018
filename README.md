@@ -2,6 +2,8 @@
 
 2018 entry for JS13k
 
+![Selfie Beverly](https://i.imgur.com/nqKYaJc.png)
+
 ## How I Saved The Internet
 
 You are Beverly, an Instagram addict. But today is gonna be the wooorst day of your life: the Internet is down!
@@ -12,3 +14,5 @@ Your goal is to fix the Internet! You will have to find a solution by yourself, 
 Good luck !
 
 Controls: use arrows to move and space bar to take a selfie in the 3G zones.
+
+![Game start](https://i.imgur.com/HCWGoUx.png)
