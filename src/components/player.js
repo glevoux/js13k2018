@@ -99,10 +99,10 @@ setInterval(function() {
 	var time = (30000 - (currentDate - player.lastSelfieTime));
 	if (time < 0) {
 		player.die();
-		remainingTime.innerHTML = 'YOU LOSE';
+		// remainingTime.innerHTML = 'YOU LOSE';
 		youAreDead.classList.add('very-dead');
 		stop = true;
 	} else {
-		remainingTime.innerHTML = 'Take a selfie before: ' + (time / 1000);
+		remainingTime.setAttribute('value', time / 1000);
 	}
 }, 33);

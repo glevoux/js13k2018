@@ -25,8 +25,11 @@
 .sprite.flower {
   background-position: calc(-96px * var(--size)) 0;
 }
-.sprite.door {
-  background-position: calc(-112px * var(--size)) 0;
+.sprite.door1 {
+  background-position: calc(-48px * var(--size)) calc(-48px * var(--size));
+}
+.sprite.door2 {
+  background-position: calc(-48px * var(--size)) calc(-64px * var(--size));
 }
 .sprite.desktop {
   background-position: calc(-48px * var(--size)) calc(-32px * var(--size));
@@ -35,7 +38,7 @@
   background-position: calc(-64px * var(--size)) calc(-32px * var(--size));
 }
 .sprite.it-plate {
-  background-position: calc(-48px * var(--size)) calc(-48px * var(--size));
+  background-position: calc(-64px * var(--size)) calc(-48px * var(--size));
 }
 
 .sprite.it1 {
@@ -188,4 +191,3 @@
 .sprite.wifi.bandwidth-3 {
 	background-position-x: calc(-48px * var(--size));
 }
-

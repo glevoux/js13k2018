@@ -1,6 +1,6 @@
 const menu = {};
 menu.el = document.querySelector('.menu');
-menu.status = 'close';
+menu.status = 'open';
 menu.inventory = [];
 menu.inventoryEl = document.querySelector('.inventory');
 

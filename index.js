@@ -1,5 +1,3 @@
-require('./src/components/game.html');
-
 require('./src/components/game.js');
 require('./src/components/elements.js');
 require('./src/components/player.js');
