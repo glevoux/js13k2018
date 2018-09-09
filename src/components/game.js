@@ -11,6 +11,7 @@ game.gameDom.style.top = '0px';
 game.domMap = [];
 game.objectsFound = [];
 game.items = ['ethernet', 'wifirouter', 'power', 'key', 'donut', 'list'];
+game.stop = true;
 
 game.drawElement = function(e) {
 	e.isRendered = true;

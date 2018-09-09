@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>How I Save The Internet</title>
+	<title>How I Saved The Internet</title>
 	<link rel="stylesheet" type="text/css" href="./main.css">
 </head>
 <body>
@@ -26,6 +26,15 @@
     <div class="centered-content">
       <div>You failed. Your followers have forgotten you... forever...</div>
       <div class="retry" onclick="location.reload()">Retry ?</div>
+    </div>
+  </div>
+
+  <div class="start-screen">
+    <div class="centered-content">
+      <h1>Welcome to How I Saved The Internet !</h1>
+      <div>To play, use Arrow-Keys to move.<br>Good Luck !</div>
+      <br>
+      <div class="retry" onclick="game.stop = false; document.querySelector('.start-screen').style.display='none';">Start</div>
     </div>
   </div>
 

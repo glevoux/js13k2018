@@ -19,10 +19,8 @@ var movementSpeed = 2;
 var remainingTime = document.querySelector('.remainingTime');
 var youAreDead = document.querySelector('.you-are-dead');
 
-var stop = false;
-
 setInterval(function() {
-	if (stop) {
+	if (Game.stop) {
 		return;
 	}
 	var deltaX = movementSpeed/16;

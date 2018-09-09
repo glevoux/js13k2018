@@ -68,6 +68,26 @@ progress[value] {
   transform: scaleX(-1);
 }
 
+.start-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  color: white;
+
+  text-align: center;
+  font-size: 3em;
+}
+.start-screen .centered-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
 .you-are-dead {
   display: none;
   position: absolute;
