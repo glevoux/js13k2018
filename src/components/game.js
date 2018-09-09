@@ -14,11 +14,11 @@ game.items = ['ethernet', 'wifirouter', 'power', 'key', 'donut', 'list'];
 game.stop = true;
 
 game.drawElement = function(e) {
-	e.isRendered = true;
-	game.gameDom.appendChild(e.dom);
+  e.isRendered = true;
+  game.gameDom.appendChild(e.dom);
 }
 game.remove = function(e) {
-	game.domMap[e.y][e.x] = undefined;
+  game.domMap[e.y][e.x] = undefined;
 }
 game.addObject = function(object) {
   let newId = Utils.makeId();

@@ -79,7 +79,7 @@ var config = {
           options: {
             context: 'public/images/',
             name: '[name].[ext]',
-            outputPath: '/'
+            outputPath: './'
           }
         }
       }

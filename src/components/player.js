@@ -20,87 +20,87 @@ var remainingTime = document.querySelector('.remainingTime');
 var youAreDead = document.querySelector('.you-are-dead');
 
 setInterval(function() {
-	if (Game.stop) {
-		return;
-	}
-	var deltaX = movementSpeed/16;
-	var deltaY = movementSpeed * 2 / 16;
+  if (Game.stop) {
+    return;
+  }
+  var deltaX = movementSpeed/16;
+  var deltaY = movementSpeed * 2 / 16;
 
-	var hitbox = player.getHitbox();
+  var hitbox = player.getHitbox();
 
-	if (player.hurted) {
-		var [hurtedTime, hurtedDirection] = player.hurted.split('-');
-		var deltaTime = (new Date()).getTime() - hurtedTime;
+  if (player.hurted) {
+    var [hurtedTime, hurtedDirection] = player.hurted.split('-');
+    var deltaTime = (new Date()).getTime() - hurtedTime;
 
-		var hit = false;
-		if (deltaTime < 300) {
-			if (hurtedDirection === 'left') {
-				if (!Map.getArround(hitbox.x - deltaY, hitbox.y - deltaX, hitbox.w, hitbox.h).left) {
-					player.move(-deltaY, -deltaX);
-				}
-			} else {
-				if (!Map.getArround(hitbox.x + deltaY, hitbox.y - deltaX, hitbox.w, hitbox.h).right) {
-					player.move(deltaY, -deltaX);
-				}
-			}
-		} else {
-			player.endHurt();
-		}
-	} else {
-		if (Game.keys[37] && !Map.getArround(hitbox.x - deltaX, hitbox.y, hitbox.w, hitbox.h).left) {
-			player.move(-deltaX, 0);
-			player.currentMovement('walking-left');
-		}
-		
-		if (Game.keys[39] && !Map.getArround(hitbox.x + deltaX, hitbox.y, hitbox.w, hitbox.h).right) {
-			player.move(deltaX, 0);
-			player.currentMovement('walking-right');
-		}
+    var hit = false;
+    if (deltaTime < 300) {
+      if (hurtedDirection === 'left') {
+        if (!Map.getArround(hitbox.x - deltaY, hitbox.y - deltaX, hitbox.w, hitbox.h).left) {
+          player.move(-deltaY, -deltaX);
+        }
+      } else {
+        if (!Map.getArround(hitbox.x + deltaY, hitbox.y - deltaX, hitbox.w, hitbox.h).right) {
+          player.move(deltaY, -deltaX);
+        }
+      }
+    } else {
+      player.endHurt();
+    }
+  } else {
+    if (Game.keys[37] && !Map.getArround(hitbox.x - deltaX, hitbox.y, hitbox.w, hitbox.h).left) {
+      player.move(-deltaX, 0);
+      player.currentMovement('walking-left');
+    }
+    
+    if (Game.keys[39] && !Map.getArround(hitbox.x + deltaX, hitbox.y, hitbox.w, hitbox.h).right) {
+      player.move(deltaX, 0);
+      player.currentMovement('walking-right');
+    }
 
-		if (Game.keys[38] && !player.jumping && !player.isFalling) {
-			player.startJump();
-		}
+    if (Game.keys[38] && !player.jumping && !player.isFalling) {
+      player.startJump();
+    }
 
-		if (!Game.keys[37] && !Game.keys[39]) {
-			player.currentMovement();
-		}
+    if (!Game.keys[37] && !Game.keys[39]) {
+      player.currentMovement();
+    }
 
-		if (player.jumping) {
-			var deltaXJ = (new Date()).getTime() - player.jumping;
-			player.falling(true);
+    if (player.jumping) {
+      var deltaXJ = (new Date()).getTime() - player.jumping;
+      player.falling(true);
 
-			if (deltaXJ < 300 && !Map.getArround(hitbox.x, hitbox.y - deltaY, hitbox.w, hitbox.h).top) {
-				player.move(0, -deltaY);
-			} else {
-				player.jumping = false;
-			}
-		} else {
-			if (!Map.getArround(hitbox.x, hitbox.y + deltaY, hitbox.w, hitbox.h).bottom) {
-				player.move(0, deltaY);
-				player.falling(true);
-			} else if (!Map.getArround(hitbox.x, hitbox.y + deltaX, hitbox.w, hitbox.h).bottom) {
-				player.move(0, deltaX);
-				player.falling(true);
-			} else {
-				player.falling(false);
-			}
-		}
-	}
+      if (deltaXJ < 300 && !Map.getArround(hitbox.x, hitbox.y - deltaY, hitbox.w, hitbox.h).top) {
+        player.move(0, -deltaY);
+      } else {
+        player.jumping = false;
+      }
+    } else {
+      if (!Map.getArround(hitbox.x, hitbox.y + deltaY, hitbox.w, hitbox.h).bottom) {
+        player.move(0, deltaY);
+        player.falling(true);
+      } else if (!Map.getArround(hitbox.x, hitbox.y + deltaX, hitbox.w, hitbox.h).bottom) {
+        player.move(0, deltaX);
+        player.falling(true);
+      } else {
+        player.falling(false);
+      }
+    }
+  }
 
-	Map.moveEnnemies(deltaX);
+  Map.moveEnnemies(deltaX);
 
-	Map.getCurrents(hitbox.x, hitbox.y, hitbox.w, hitbox.h).forEach(function(t) {
-		t.element.touch(player, t.direction);
-	});
+  Map.getCurrents(hitbox.x, hitbox.y, hitbox.w, hitbox.h).forEach(function(t) {
+    t.element.touch(player, t.direction);
+  });
 
-	var currentDate = (new Date()).getTime();
-	var time = (30000 - (currentDate - player.lastSelfieTime));
-	if (time < 0) {
-		player.die();
-		// remainingTime.innerHTML = 'YOU LOSE';
-		youAreDead.classList.add('very-dead');
-		stop = true;
-	} else {
-		remainingTime.setAttribute('value', time / 1000);
-	}
+  var currentDate = (new Date()).getTime();
+  var time = (30000 - (currentDate - player.lastSelfieTime));
+  if (time < 0) {
+    player.die();
+    // remainingTime.innerHTML = 'YOU LOSE';
+    youAreDead.classList.add('very-dead');
+    stop = true;
+  } else {
+    remainingTime.setAttribute('value', time / 1000);
+  }
 }, 33);
