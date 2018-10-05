@@ -15,6 +15,7 @@ Good luck!
 
 Controls: use arrows to move and space bar to take a selfie in the 3G zones.
 
-[Try it now](https://github.com/glevoux/js13k2018/raw/master/dist/HowISaveTheInternet.zip)
+### Try it now!
+[Live version](https://js13kgames.com/entries/how-i-saved-the-internet) | [Zip version](https://github.com/glevoux/js13k2018/raw/master/dist/HowISaveTheInternet.zip)
 
 ![Game start](https://i.imgur.com/HCWGoUx.png)
